@@ -1,0 +1,160 @@
+/* ===Global=== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  font-family: var(--ff-primary);
+  font-size: var(--fs-normal);
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: var(--transition);
+}
+
+ul {
+  list-style: none;
+  padding-inline-start: 0;
+}
+
+a:hover {
+  opacity: var(--less-opacity);
+  transition: var(--transition);
+}
+
+button {
+  padding: 0;
+  background: none;
+  margin: 0;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  text-transform: inherit;
+  transition: var(--transition);
+}
+
+button:hover {
+  opacity: var(--less-opacity);
+  transition: var(--transition);
+}
+
+/* ===Fonts=== */
+
+@font-face {
+  font-family: Avenir;
+  src: url(../assets/fonts/Avenir.otf);
+  font-display: swap;
+  font-weight: normal;
+}
+
+/* ===Variables=== */
+
+:root {
+  --ff-primary: "Avenir", sans-serif;
+  --fs-normal: calc(1rem + 0.25vw);
+  --fs-small: calc(0.75rem + 0.25vw);
+  --fs-medium: calc(1rem + 1vw);
+  --transition: all 400ms;
+  --longer-transition: all 700ms;
+  --less-opacity: 0.75;
+}
+
+/* ===Navbar=== */
+
+nav {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 20px 10vw;
+  text-transform: uppercase;
+}
+
+.nav-logo {
+  font-size: var(--fs-medium);
+}
+
+.menu {
+  text-align: right;
+  position: relative;
+}
+
+.sub-menu {
+  position: absolute;
+  right: 0;
+  width: 500px;
+  overflow: hidden;
+}
+
+.sub-menu li {
+  opacity: 0;
+}
+
+.open {
+  height: fit-content;
+  transition: var(--longer-transition);
+}
+
+.closed {
+  height: 0;
+  transition: var(--longer-transition);
+}
+
+.open li {
+  animation: fadeIn 0.5s ease-in-out 0.3s forwards;
+}
+
+.open li:nth-of-type(1) {
+  animation-delay: 0.15s;
+}
+
+.open li:nth-of-type(2) {
+  animation-delay: 0.3s;
+}
+
+.open li:nth-of-type(3) {
+  animation-delay: 0.45s;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
