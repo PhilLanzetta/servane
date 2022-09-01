@@ -6,7 +6,7 @@ import { useState } from "react"
 
 const Works = ({ data, location }) => {
   const { years } = data.contentfulHomePage
-  const [isExhibit, setIsExhibit] = useState(location.state.exhibit)
+  const [isExhibit, setIsExhibit] = useState(location.state?.exhibit)
   const descYears = years
     .map(year => parseInt(year, 10))
     .sort(function (a, b) {

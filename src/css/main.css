@@ -336,7 +336,7 @@ nav {
   padding: 10px 10vw;
   width: 100%;
   background: #fff;
-  z-index: 100;
+  z-index: 80;
 }
 
 .next-prev-link-container {
@@ -363,6 +363,11 @@ nav {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+.bio-page p {
+  display: block;
+  min-height: var(--fs-normal);
 }
 
 @media (max-width: 700px) {

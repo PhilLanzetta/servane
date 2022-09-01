@@ -4,7 +4,7 @@ import Layout from "../components/layout"
 const Essays = () => {
   return (
     <Layout>
-      <div>Essays</div>
+      <section>Essays/Press</section>
     </Layout>
   )
 }
