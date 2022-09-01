@@ -9,11 +9,16 @@
     "gatsby-plugin-image": "^2.21.0",
     "gatsby-plugin-manifest": "^4.21.0",
     "gatsby-plugin-sharp": "^4.21.0",
+    "gatsby-source-contentful": "^7.19.1",
     "gatsby-source-filesystem": "^4.21.1",
     "gatsby-transformer-sharp": "^4.21.0",
     "prop-types": "^15.8.1",
     "react": "^18.1.0",
-    "react-dom": "^18.1.0"
+    "react-dom": "^18.1.0",
+    "react-slick": "^0.29.0",
+    "scroll-to-element": "^2.0.3",
+    "slick-carousel": "^1.8.1",
+    "slugify": "^1.6.5"
   },
   "devDependencies": {
     "prettier": "^2.7.1"

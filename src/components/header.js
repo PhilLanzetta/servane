@@ -19,7 +19,7 @@ const Header = ({ isOpen, toggleMenu }) => (
             <Link to="/essays-press">Essays & Press</Link>
           </li>
           <li>
-            <Link to="/contact">Contact</Link>
+            <a href="mailto:servane@servanemary.com">Contact</a>
           </li>
         </ul>
       </div>
