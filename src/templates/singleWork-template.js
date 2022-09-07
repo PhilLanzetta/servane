@@ -100,6 +100,55 @@ const SingleWork = ({ data, pageContext }) => {
               <span>&nbsp;&#8811;</span>, {artworkYear}.
             </p>
             <p>{artworkDescription}</p>
+            {exhibitionHistory && (
+              <article className="exhibition-history">
+                <h3>Exhibition History</h3>
+                {exhibitionHistory.map((exhibit, index) => {
+                  const exhibitSlug = slugify(exhibit.exhibitionTitle, {
+                    lower: true,
+                  })
+                  return (
+                    <Link
+                      key={index}
+                      to={`/exhibitions/${exhibitSlug}`}
+                      className="exhibit-info"
+                    >
+                      <span className="exhibit-title">
+                        {exhibit.exhibitionTitle}
+                      </span>
+                      ,{" "}
+                      {exhibit.exhibitionOrganizer && (
+                        <span>
+                          organized by {exhibit.exhibitionOrganizer},{" "}
+                        </span>
+                      )}
+                      <span className="exhibit-location">
+                        {exhibit.exhibitionLocation}
+                      </span>
+                      ,{" "}
+                      <span className="exhibit-dates">
+                        {new Date(exhibit.exhibitionStartDate).toLocaleString(
+                          "default",
+                          {
+                            month: "long",
+                            day: "numeric",
+                          }
+                        )}{" "}
+                        -{" "}
+                        {new Date(exhibit.exhibitionEndDate).toLocaleString(
+                          "default",
+                          {
+                            month: "long",
+                            day: "numeric",
+                            year: "numeric",
+                          }
+                        )}
+                      </span>
+                    </Link>
+                  )
+                })}
+              </article>
+            )}
           </article>
           <Slider {...settings} className="work-slides">
             {artworkImages.map(image => (
@@ -113,53 +162,6 @@ const SingleWork = ({ data, pageContext }) => {
             ))}
           </Slider>
         </article>
-        {exhibitionHistory && (
-          <article className="exhibition-history">
-            <h3>Exhibition History</h3>
-            {exhibitionHistory.map((exhibit, index) => {
-              const exhibitSlug = slugify(exhibit.exhibitionTitle, {
-                lower: true,
-              })
-              return (
-                <Link
-                  key={index}
-                  to={`/exhibitions/${exhibitSlug}`}
-                  className="exhibit-info"
-                >
-                  <span className="exhibit-title">
-                    {exhibit.exhibitionTitle}
-                  </span>
-                  ,{" "}
-                  {exhibit.exhibitionOrganizer && (
-                    <span>organized by {exhibit.exhibitionOrganizer}, </span>
-                  )}
-                  <span className="exhibit-location">
-                    {exhibit.exhibitionLocation}
-                  </span>
-                  ,{" "}
-                  <span className="exhibit-dates">
-                    {new Date(exhibit.exhibitionStartDate).toLocaleString(
-                      "default",
-                      {
-                        month: "long",
-                        day: "numeric",
-                      }
-                    )}{" "}
-                    -{" "}
-                    {new Date(exhibit.exhibitionEndDate).toLocaleString(
-                      "default",
-                      {
-                        month: "long",
-                        day: "numeric",
-                        year: "numeric",
-                      }
-                    )}
-                  </span>
-                </Link>
-              )
-            })}
-          </article>
-        )}
       </section>
     </Layout>
   )

@@ -126,6 +126,30 @@ const SingleExhibit = ({ data, pageContext }) => {
                 View the Press Release
               </a>
             )}
+            {worksInExhibition && (
+              <article className="works-in-exhibit">
+                <h3>Works in Exhibition</h3>
+                <article className="exhibit-works-container">
+                  {worksInExhibition.map((work, index) => {
+                    const slug = slugify(work.artworkTitle, { lower: true })
+                    return (
+                      <Link
+                        key={index}
+                        to={`/works/${slug}`}
+                        className="work-thumbnail-container"
+                      >
+                        <figure>
+                          <GatsbyImage
+                            image={work.artworkImages[0].gatsbyImageData}
+                          ></GatsbyImage>
+                          <figcaption>{work.artworkTitle}</figcaption>
+                        </figure>
+                      </Link>
+                    )
+                  })}
+                </article>
+              </article>
+            )}
           </article>
           <Slider {...settings} className="work-slides">
             {exhibitionImages.map(image => (
@@ -139,30 +163,6 @@ const SingleExhibit = ({ data, pageContext }) => {
             ))}
           </Slider>
         </article>
-        {worksInExhibition && (
-          <article className="works-in-exhibit">
-            <h3>Works in Exhibition</h3>
-            <article className="exhibit-works-container">
-              {worksInExhibition.map((work, index) => {
-                const slug = slugify(work.artworkTitle, { lower: true })
-                return (
-                  <Link
-                    key={index}
-                    to={`/works/${slug}`}
-                    className="work-thumbnail-container"
-                  >
-                    <figure>
-                      <GatsbyImage
-                        image={work.artworkImages[0].gatsbyImageData}
-                      ></GatsbyImage>
-                      <figcaption>{work.artworkTitle}</figcaption>
-                    </figure>
-                  </Link>
-                )
-              })}
-            </article>
-          </article>
-        )}
       </section>
     </Layout>
   )
