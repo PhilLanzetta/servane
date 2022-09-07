@@ -121,21 +121,20 @@ button:hover {
 
 nav {
   width: 100%;
-  height: 75px;
+  height: 60px;
   position: fixed;
   top: 0;
   left: 0;
   background: #fff;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 0 10vw;
+  align-items: flex-end;
+  padding: 0 10vw 5px 10vw;
   text-transform: uppercase;
   z-index: 100;
 }
 
 .nav-logo {
-  font-size: var(--fs-medium);
   z-index: 200;
 }
 
@@ -338,7 +337,7 @@ nav {
   justify-content: space-between;
   position: fixed;
   left: 0;
-  top: 75px;
+  top: 60px;
   padding: 10px 10vw;
   width: 100%;
   background: #fff;
@@ -378,7 +377,7 @@ nav {
 
 @media (max-width: 700px) {
   nav {
-    padding: 0 5vw;
+    padding: 0 5vw 5px 5vw;
   }
 
   section {
