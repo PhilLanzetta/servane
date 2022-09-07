@@ -98,6 +98,35 @@ const SingleExhibit = ({ data, pageContext }) => {
       </aside>
       <section>
         <article className="work-slideshow">
+          <article className="exhibit-info">
+            <p>
+              <span className="exhibit-title">{exhibitionTitle}</span>,{" "}
+              {exhibitionLocation}{" "}
+              {exhibitionOrganizer && (
+                <span>organized by {exhibitionOrganizer}, </span>
+              )}
+              {new Date(exhibitionStartDate).toLocaleString("default", {
+                month: "long",
+                day: "numeric",
+              })}{" "}
+              -{" "}
+              {new Date(exhibitionEndDate).toLocaleString("default", {
+                month: "long",
+                day: "numeric",
+                year: "numeric",
+              })}
+            </p>
+            {pressRelease && (
+              <a
+                href={pressRelease.url}
+                className="exhibit-press-release"
+                target="_blank"
+                rel="noreferrer"
+              >
+                View the Press Release
+              </a>
+            )}
+          </article>
           <Slider {...settings} className="work-slides">
             {exhibitionImages.map(image => (
               <div className="work-slides-container">
@@ -109,35 +138,6 @@ const SingleExhibit = ({ data, pageContext }) => {
               </div>
             ))}
           </Slider>
-        </article>
-        <article className="exhibit-info">
-          <p>
-            <span className="exhibit-title">{exhibitionTitle}</span>,{" "}
-            {exhibitionLocation}{" "}
-            {exhibitionOrganizer && (
-              <span>organized by {exhibitionOrganizer}, </span>
-            )}
-            {new Date(exhibitionStartDate).toLocaleString("default", {
-              month: "long",
-              day: "numeric",
-            })}{" "}
-            -{" "}
-            {new Date(exhibitionEndDate).toLocaleString("default", {
-              month: "long",
-              day: "numeric",
-              year: "numeric",
-            })}
-          </p>
-          {pressRelease && (
-            <a
-              href={pressRelease.url}
-              className="exhibit-press-release"
-              target="_blank"
-              rel="noreferrer"
-            >
-              View the Press Release
-            </a>
-          )}
         </article>
         {worksInExhibition && (
           <article className="works-in-exhibit">

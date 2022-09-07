@@ -93,6 +93,14 @@ const SingleWork = ({ data, pageContext }) => {
       </aside>
       <section>
         <article className="work-slideshow">
+          <article className="artwork-info">
+            <p>
+              <span>&#8810;&nbsp;</span>
+              {artworkTitle}
+              <span>&nbsp;&#8811;</span>, {artworkYear}.
+            </p>
+            <p>{artworkDescription}</p>
+          </article>
           <Slider {...settings} className="work-slides">
             {artworkImages.map(image => (
               <div className="work-slides-container" key={image.id}>
@@ -104,14 +112,6 @@ const SingleWork = ({ data, pageContext }) => {
               </div>
             ))}
           </Slider>
-        </article>
-        <article className="artwork-info">
-          <p>
-            <span>&#8810;&nbsp;</span>
-            {artworkTitle}
-            <span>&nbsp;&#8811;</span>, {artworkYear}.
-          </p>
-          <p>{artworkDescription}</p>
         </article>
         {exhibitionHistory && (
           <article className="exhibition-history">
