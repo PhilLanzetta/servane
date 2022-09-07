@@ -93,74 +93,78 @@ const SingleWork = ({ data, pageContext }) => {
       </aside>
       <section>
         <article className="work-slideshow">
-          <article className="artwork-info">
-            <p>
-              <span>&#8810;&nbsp;</span>
-              {artworkTitle}
-              <span>&nbsp;&#8811;</span>, {artworkYear}.
-            </p>
-            <p>{artworkDescription}</p>
-            {exhibitionHistory && (
-              <article className="exhibition-history">
-                <h3>Exhibition History</h3>
-                {exhibitionHistory.map((exhibit, index) => {
-                  const exhibitSlug = slugify(exhibit.exhibitionTitle, {
-                    lower: true,
-                  })
-                  return (
-                    <Link
-                      key={index}
-                      to={`/exhibitions/${exhibitSlug}`}
-                      className="exhibit-info"
-                    >
-                      <span className="exhibit-title">
-                        {exhibit.exhibitionTitle}
-                      </span>
-                      ,{" "}
-                      {exhibit.exhibitionOrganizer && (
-                        <span>
-                          organized by {exhibit.exhibitionOrganizer},{" "}
-                        </span>
-                      )}
-                      <span className="exhibit-location">
-                        {exhibit.exhibitionLocation}
-                      </span>
-                      ,{" "}
-                      <span className="exhibit-dates">
-                        {new Date(exhibit.exhibitionStartDate).toLocaleString(
-                          "default",
-                          {
-                            month: "long",
-                            day: "numeric",
-                          }
-                        )}{" "}
-                        -{" "}
-                        {new Date(exhibit.exhibitionEndDate).toLocaleString(
-                          "default",
-                          {
-                            month: "long",
-                            day: "numeric",
-                            year: "numeric",
-                          }
-                        )}
-                      </span>
-                    </Link>
-                  )
-                })}
-              </article>
-            )}
-          </article>
           <Slider {...settings} className="work-slides">
-            {artworkImages.map(image => (
-              <div className="work-slides-container" key={image.id}>
-                <GatsbyImage
-                  image={image.gatsbyImageData}
-                  alt={image.description}
-                  className="work-slide-img"
-                ></GatsbyImage>
-              </div>
-            ))}
+            {artworkImages.map(image => {
+              const imgWidth =
+                (image.gatsbyImageData.width * 40) /
+                image.gatsbyImageData.height
+              return (
+                <div className="work-slides-container" key={image.id}>
+                  <GatsbyImage
+                    image={image.gatsbyImageData}
+                    alt={image.description}
+                    style={{ width: `${imgWidth}vw` }}
+                    className="work-slide-img"
+                  ></GatsbyImage>
+                </div>
+              )
+            })}
           </Slider>
+        </article>
+        <article className="artwork-info">
+          <p>
+            <span>&#8810;&nbsp;</span>
+            {artworkTitle}
+            <span>&nbsp;&#8811;</span>, {artworkYear}.
+          </p>
+          <p>{artworkDescription}</p>
+          {exhibitionHistory && (
+            <article className="exhibition-history">
+              <h3>Exhibition History</h3>
+              {exhibitionHistory.map((exhibit, index) => {
+                const exhibitSlug = slugify(exhibit.exhibitionTitle, {
+                  lower: true,
+                })
+                return (
+                  <Link
+                    key={index}
+                    to={`/exhibitions/${exhibitSlug}`}
+                    className="exhibit-info"
+                  >
+                    <span className="exhibit-title">
+                      {exhibit.exhibitionTitle}
+                    </span>
+                    ,{" "}
+                    {exhibit.exhibitionOrganizer && (
+                      <span>organized by {exhibit.exhibitionOrganizer}, </span>
+                    )}
+                    <span className="exhibit-location">
+                      {exhibit.exhibitionLocation}
+                    </span>
+                    ,{" "}
+                    <span className="exhibit-dates">
+                      {new Date(exhibit.exhibitionStartDate).toLocaleString(
+                        "default",
+                        {
+                          month: "long",
+                          day: "numeric",
+                        }
+                      )}{" "}
+                      -{" "}
+                      {new Date(exhibit.exhibitionEndDate).toLocaleString(
+                        "default",
+                        {
+                          month: "long",
+                          day: "numeric",
+                          year: "numeric",
+                        }
+                      )}
+                    </span>
+                  </Link>
+                )
+              })}
+            </article>
+          )}
         </article>
       </section>
     </Layout>
@@ -175,7 +179,7 @@ export const query = graphql`
       artworkDate
       artworkImages {
         id
-        gatsbyImageData
+        gatsbyImageData(placeholder: BLURRED)
         description
       }
       exhibitionHistory {

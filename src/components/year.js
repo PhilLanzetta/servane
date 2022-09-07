@@ -13,7 +13,7 @@ const query = graphql`
         artworkTitle
         artworkImages {
           description
-          gatsbyImageData
+          gatsbyImageData(placeholder: BLURRED)
           id
         }
       }
@@ -56,16 +56,25 @@ const Year = ({ year, isExhibit }) => {
         <article className="works-container fade-in">
           {works.map(work => {
             const artworkYear = new Date(work.artworkDate).getFullYear()
+            const imgWidth =
+              (work.artworkImages[0].gatsbyImageData.width * 20) /
+              work.artworkImages[0].gatsbyImageData.height
             if (artworkYear === year) {
               const slug = slugify(work.artworkTitle, {
                 lower: true,
                 remove: /[*+~.()"!:@]/g,
               })
               return (
-                <Link key={work.id} to={slug} className="work-thumbnail-container">
+                <Link
+                  key={work.id}
+                  to={slug}
+                  className="work-thumbnail-container"
+                >
                   <GatsbyImage
                     image={work.artworkImages[0].gatsbyImageData}
                     alt={work.artworkImages[0].description}
+                    style={{width: `${imgWidth}vw`}}
+                    className="work-thumbnail"
                   ></GatsbyImage>
                 </Link>
               )

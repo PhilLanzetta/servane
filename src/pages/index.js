@@ -44,7 +44,7 @@ export const query = graphql`
       homeImageTitle
       years
       homeImage {
-        gatsbyImageData
+        gatsbyImageData(placeholder: BLURRED)
         id
         description
         title
