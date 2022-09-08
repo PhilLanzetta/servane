@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import Layout from "../components/layout"
 import Slider from "react-slick"
 import slugify from "slugify"
@@ -9,7 +9,7 @@ function NextArrow(props) {
   const { onClick } = props
   return (
     <div
-      className="image-next"
+      className={props.addClassName}
       onClick={onClick}
       onKeyDown={onClick}
       role="button"
@@ -34,7 +34,7 @@ function PrevArrow(props) {
   const { onClick } = props
   return (
     <div
-      className="image-prev"
+      className={props.addClassName}
       onClick={onClick}
       onKeyDown={onClick}
       role="button"
@@ -71,10 +71,34 @@ const SingleExhibit = ({ data, pageContext }) => {
   } = data.contentfulExhibition
 
   const exhibitionYear = new Date(exhibitionStartDate).getFullYear()
+  const [isOpen, setIsOpen] = useState(false)
+  const [imageId, setImageId] = useState(0)
+
+  useEffect(() => {
+    isOpen && (document.body.style.overflow = "hidden")
+    !isOpen && (document.body.style.overflow = "unset")
+  }, [isOpen])
+
+  const handleOpen = id => {
+    setImageId(id)
+    setIsOpen(true)
+  }
+
+  const handleClose = () => {
+    setIsOpen(false)
+    setImageId(null)
+  }
 
   const settings = {
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
+    nextArrow: <NextArrow addClassName="image-next" />,
+    prevArrow: <PrevArrow addClassName="image-prev" />,
+  }
+
+  const fullSettings = {
+    nextArrow: <NextArrow addClassName="modal-next" />,
+    prevArrow: <PrevArrow addClassName="modal-prev" />,
+    initialSlide: imageId,
+    adaptiveHeight: true,
   }
 
   return (
@@ -99,14 +123,19 @@ const SingleExhibit = ({ data, pageContext }) => {
       <section>
         <article className="work-slideshow">
           <Slider {...settings} className="work-slides">
-            {exhibitionImages.map(image => {
+            {exhibitionImages.map((image, index) => {
               const imgWidth =
                 (image.gatsbyImageData.width * 40) /
                 image.gatsbyImageData.height
               return (
-                <div className="work-slides-container">
+                <div
+                  className="work-slides-container"
+                  key={image.id}
+                  role="presentation"
+                  aria-label="click to enlarge image"
+                  onClick={() => handleOpen(index)}
+                >
                   <GatsbyImage
-                    key={image.id}
                     image={image.gatsbyImageData}
                     style={{ width: `${imgWidth}vw` }}
                     alt={image.description}
@@ -180,6 +209,29 @@ const SingleExhibit = ({ data, pageContext }) => {
           )}
         </article>
       </section>
+      {isOpen && (
+        <aside className="modal">
+          <button className="close-btn white" onClick={handleClose}>
+            X
+          </button>
+          <Slider {...fullSettings} className="modal-slider">
+            {exhibitionImages.map((image, index) => {
+              return (
+                <div className="modal-slides-container" key={image.id}>
+                  <div className="modal-img-container">
+                    <GatsbyImage
+                      image={image.gatsbyImageData}
+                      imgStyle={{ objectFit: "contain" }}
+                      alt={image.description}
+                      className="modal-slide-img"
+                    ></GatsbyImage>
+                  </div>
+                </div>
+              )
+            })}
+          </Slider>
+        </aside>
+      )}
     </Layout>
   )
 }

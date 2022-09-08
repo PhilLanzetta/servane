@@ -300,10 +300,13 @@ nav {
   justify-content: center;
   align-items: center;
   width: 100%;
+  cursor: pointer;
 }
 
 .image-prev,
-.image-next {
+.image-next,
+.modal-prev,
+.modal-next {
   position: absolute;
   width: 25px;
   top: 50%;
@@ -311,12 +314,29 @@ nav {
   cursor: pointer;
 }
 
+.modal-prev,
+.modal-next {
+  width: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 801;
+}
+
 .image-prev {
   left: -35px;
 }
 
+.modal-prev {
+  left: 25px;
+}
+
 .image-next {
   right: -35px;
+}
+
+.modal-next {
+  right: 25px;
 }
 
 .artwork-info,
@@ -361,6 +381,7 @@ nav {
 
 .next-prev-link {
   margin-left: 50px;
+  text-align: right;
 }
 
 .exhibit-works-container {
@@ -383,6 +404,49 @@ nav {
 .bio-page p {
   display: block;
   min-height: var(--fs-normal);
+}
+
+.modal {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  background: #fff;
+  z-index: 500;
+  animation: fadeIn 400ms forwards;
+}
+
+.modal button {
+  position: absolute;
+  top: 3vw;
+  right: 5vw;
+  padding: 5px 15px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.5);
+  font-size: var(--fs-medium);
+  z-index: 800;
+}
+
+.modal-slider {
+  height: 100%;
+  width: 100%;
+}
+
+.modal-img-container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-slide-img {
+  max-height: 100%;
+  max-width: 100%;
 }
 
 @media (max-width: 700px) {
@@ -423,6 +487,19 @@ nav {
     width: 15px;
   }
 
+  .modal-next,
+  .modal-prev {
+    width: 20px;
+  }
+
+  .modal-next {
+    right: 15px;
+  }
+
+  .modal-prev {
+    left: 15px;
+  }
+
   .image-next {
     right: -25px;
   }
@@ -440,5 +517,9 @@ nav {
     justify-content: flex-start;
     align-items: flex-end;
     gap: 10px;
+  }
+
+  .next-prev-link {
+    margin-left: 10px;
   }
 }
