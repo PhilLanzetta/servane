@@ -72,8 +72,8 @@ const SingleWork = ({ data, pageContext }) => {
   const [imageId, setImageId] = useState(0)
 
   useEffect(() => {
-    isOpen && (document.body.style.overflow = 'hidden')
-    !isOpen && (document.body.style.overflow = 'unset')
+    isOpen && (document.body.style.overflow = "hidden")
+    !isOpen && (document.body.style.overflow = "unset")
   }, [isOpen])
 
   const handleOpen = id => {
@@ -121,9 +121,6 @@ const SingleWork = ({ data, pageContext }) => {
         <article className="work-slideshow">
           <Slider {...settings} className="work-slides">
             {artworkImages.map((image, index) => {
-              const imgWidth =
-                (image.gatsbyImageData.width * 40) /
-                image.gatsbyImageData.height
               return (
                 <div
                   className="work-slides-container"
@@ -132,71 +129,74 @@ const SingleWork = ({ data, pageContext }) => {
                   aria-label="click to enlarge image"
                   onClick={() => handleOpen(index)}
                 >
-                  <GatsbyImage
-                    image={image.gatsbyImageData}
-                    alt={image.description}
-                    style={{ width: `${imgWidth}vw` }}
-                    className="work-slide-img"
-                  ></GatsbyImage>
+                  <div className="work-slide-img-container">
+                    <GatsbyImage
+                      image={image.gatsbyImageData}
+                      alt={image.description}
+                      className="work-slide-img"
+                    ></GatsbyImage>
+                  </div>
                 </div>
               )
             })}
           </Slider>
-        </article>
-        <article className="artwork-info">
-          <p>
-            <span>&#8810;&nbsp;</span>
-            {artworkTitle}
-            <span>&nbsp;&#8811;</span>, {artworkYear}.
-          </p>
-          <p>{artworkDescription}</p>
-          {exhibitionHistory && (
-            <article className="exhibition-history">
-              <h3>Exhibition History</h3>
-              {exhibitionHistory.map((exhibit, index) => {
-                const exhibitSlug = slugify(exhibit.exhibitionTitle, {
-                  lower: true,
-                })
-                return (
-                  <Link
-                    key={index}
-                    to={`/exhibitions/${exhibitSlug}`}
-                    className="exhibit-info"
-                  >
-                    <span className="exhibit-title">
-                      {exhibit.exhibitionTitle}
-                    </span>
-                    ,{" "}
-                    {exhibit.exhibitionOrganizer && (
-                      <span>organized by {exhibit.exhibitionOrganizer}, </span>
-                    )}
-                    <span className="exhibit-location">
-                      {exhibit.exhibitionLocation}
-                    </span>
-                    ,{" "}
-                    <span className="exhibit-dates">
-                      {new Date(exhibit.exhibitionStartDate).toLocaleString(
-                        "default",
-                        {
-                          month: "long",
-                          day: "numeric",
-                        }
-                      )}{" "}
-                      -{" "}
-                      {new Date(exhibit.exhibitionEndDate).toLocaleString(
-                        "default",
-                        {
-                          month: "long",
-                          day: "numeric",
-                          year: "numeric",
-                        }
+          <article className="artwork-info">
+            <p>
+              <span>&#8810;&nbsp;</span>
+              {artworkTitle}
+              <span>&nbsp;&#8811;</span>, {artworkYear}.
+            </p>
+            <p>{artworkDescription}</p>
+            {exhibitionHistory && (
+              <article className="exhibition-history">
+                <h3>Exhibition History</h3>
+                {exhibitionHistory.map((exhibit, index) => {
+                  const exhibitSlug = slugify(exhibit.exhibitionTitle, {
+                    lower: true,
+                  })
+                  return (
+                    <Link
+                      key={index}
+                      to={`/exhibitions/${exhibitSlug}`}
+                      className="exhibit-info"
+                    >
+                      <span className="exhibit-title">
+                        {exhibit.exhibitionTitle}
+                      </span>
+                      ,{" "}
+                      {exhibit.exhibitionOrganizer && (
+                        <span>
+                          organized by {exhibit.exhibitionOrganizer},{" "}
+                        </span>
                       )}
-                    </span>
-                  </Link>
-                )
-              })}
-            </article>
-          )}
+                      <span className="exhibit-location">
+                        {exhibit.exhibitionLocation}
+                      </span>
+                      ,{" "}
+                      <span className="exhibit-dates">
+                        {new Date(exhibit.exhibitionStartDate).toLocaleString(
+                          "default",
+                          {
+                            month: "long",
+                            day: "numeric",
+                          }
+                        )}{" "}
+                        -{" "}
+                        {new Date(exhibit.exhibitionEndDate).toLocaleString(
+                          "default",
+                          {
+                            month: "long",
+                            day: "numeric",
+                            year: "numeric",
+                          }
+                        )}
+                      </span>
+                    </Link>
+                  )
+                })}
+              </article>
+            )}
+          </article>
         </article>
       </section>
       {isOpen && (

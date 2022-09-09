@@ -124,9 +124,6 @@ const SingleExhibit = ({ data, pageContext }) => {
         <article className="work-slideshow">
           <Slider {...settings} className="work-slides">
             {exhibitionImages.map((image, index) => {
-              const imgWidth =
-                (image.gatsbyImageData.width * 40) /
-                image.gatsbyImageData.height
               return (
                 <div
                   className="work-slides-container"
@@ -135,78 +132,80 @@ const SingleExhibit = ({ data, pageContext }) => {
                   aria-label="click to enlarge image"
                   onClick={() => handleOpen(index)}
                 >
-                  <GatsbyImage
-                    image={image.gatsbyImageData}
-                    style={{ width: `${imgWidth}vw` }}
-                    alt={image.description}
-                  ></GatsbyImage>
+                  <div className="work-slide-img-container">
+                    <GatsbyImage
+                      image={image.gatsbyImageData}
+                      alt={image.description}
+                      className="work-slide-img"
+                    ></GatsbyImage>
+                  </div>
                 </div>
               )
             })}
           </Slider>
-        </article>
-        <article className="exhibit-info">
-          <p>
-            <span className="exhibit-title">{exhibitionTitle}</span>,{" "}
-            {exhibitionLocation}{" "}
-            {exhibitionOrganizer && (
-              <span>organized by {exhibitionOrganizer}, </span>
+          <article className="exhibit-info">
+            <p>
+              <span className="exhibit-title">{exhibitionTitle}</span>,{" "}
+              {exhibitionLocation}{" "}
+              {exhibitionOrganizer && (
+                <span>organized by {exhibitionOrganizer}, </span>
+              )}
+              {new Date(exhibitionStartDate).toLocaleString("default", {
+                month: "long",
+                day: "numeric",
+              })}{" "}
+              -{" "}
+              {new Date(exhibitionEndDate).toLocaleString("default", {
+                month: "long",
+                day: "numeric",
+                year: "numeric",
+              })}
+            </p>
+            {pressRelease && (
+              <a
+                href={pressRelease.url}
+                className="exhibit-press-release"
+                target="_blank"
+                rel="noreferrer"
+              >
+                View the Press Release
+              </a>
             )}
-            {new Date(exhibitionStartDate).toLocaleString("default", {
-              month: "long",
-              day: "numeric",
-            })}{" "}
-            -{" "}
-            {new Date(exhibitionEndDate).toLocaleString("default", {
-              month: "long",
-              day: "numeric",
-              year: "numeric",
-            })}
-          </p>
-          {pressRelease && (
-            <a
-              href={pressRelease.url}
-              className="exhibit-press-release"
-              target="_blank"
-              rel="noreferrer"
-            >
-              View the Press Release
-            </a>
-          )}
-          {worksInExhibition && (
-            <article className="works-in-exhibit">
-              <h3>Works in Exhibition</h3>
-              <article className="exhibit-works-container">
-                {worksInExhibition.map((work, index) => {
-                  const slug = slugify(work.artworkTitle, { lower: true })
-                  return (
-                    <>
-                      {work.artworkImages.map((image, index) => {
-                        const imgWidth =
-                          (image.gatsbyImageData.width * 20) /
-                          image.gatsbyImageData.height
-                        return (
-                          <Link
-                            key={index}
-                            to={`/works/${slug}`}
-                            className="work-thumbnail-container"
-                          >
-                            <figure>
-                              <GatsbyImage
-                                image={image.gatsbyImageData}
-                                style={{ width: `${imgWidth}vw` }}
-                              ></GatsbyImage>
-                              <figcaption>{work.artworkTitle}</figcaption>
-                            </figure>
-                          </Link>
-                        )
-                      })}
-                    </>
-                  )
-                })}
+            {worksInExhibition && (
+              <article className="works-in-exhibit">
+                <h3>Works in Exhibition</h3>
+                <article className="exhibit-works-container">
+                  {worksInExhibition.map((work, index) => {
+                    const slug = slugify(work.artworkTitle, { lower: true })
+                    return (
+                      <>
+                        {work.artworkImages.map((image, index) => {
+                          const imgWidth =
+                            (image.gatsbyImageData.width * 15) /
+                            image.gatsbyImageData.height
+                          return (
+                            <Link
+                              key={index}
+                              to={`/works/${slug}`}
+                              className="exhibit-work-thumbnail-container"
+                            >
+                              <figure>
+                                <GatsbyImage
+                                  image={image.gatsbyImageData}
+                                  style={{ width: `${imgWidth}vw` }}
+                                ></GatsbyImage>
+                                <figcaption>{work.artworkTitle}</figcaption>
+                              </figure>
+                            </Link>
+                          )
+                        })}
+                      </>
+                    )
+                  })}
+                </article>
               </article>
-            </article>
-          )}
+            )}
+          </article>
         </article>
       </section>
       {isOpen && (

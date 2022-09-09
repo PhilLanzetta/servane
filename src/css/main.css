@@ -277,28 +277,36 @@ nav {
   height: 20vw;
 }
 
+.exhibit-work-thumbnail-container {
+  display: flex;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
+  margin: 0 2% 6% 0;
+  height: 15vw;
+}
+
 .work-thumbnail {
   height: 100%;
 }
 
 .work-slideshow {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.exhibit {
+  align-items: flex-start;
 }
 
 .work-slides {
-  width: 95%;
+  width: 50%;
+  height: calc(80vh - 125px);
 }
 
-.work-slide-img {
-  height: 40vw;
-}
-
-.work-slides-container {
-  display: flex !important;
-  justify-content: center;
-  align-items: center;
+.work-slide-img-container {
+  display: flex;
+  height: calc(80vh - 125px);
   width: 100%;
   cursor: pointer;
 }
@@ -308,7 +316,7 @@ nav {
 .modal-prev,
 .modal-next {
   position: absolute;
-  width: 25px;
+  width: 15px;
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
@@ -316,7 +324,6 @@ nav {
 
 .modal-prev,
 .modal-next {
-  width: 35px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -341,11 +348,11 @@ nav {
 
 .artwork-info,
 .exhibit-info {
-  padding-top: 15px;
+  padding-top: calc(40vh - 125px);
   padding-right: 5vw;
 }
 
-.artwork-info p {
+.artwork-info p, .exhibit-info p {
   font-size: var(--fs-small);
 }
 
@@ -387,10 +394,12 @@ nav {
 .exhibit-works-container {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .exhibit-press-release {
   font-weight: bold;
+  font-size: var(--fs-small);
 }
 
 .error-page {
@@ -472,6 +481,11 @@ nav {
   max-width: 100%;
 }
 
+.work-slide-img {
+  min-height: 100%;
+  min-width: 100%;
+}
+
 @media (max-width: 700px) {
   nav {
     padding: 0 5vw 5px 5vw;
@@ -497,6 +511,16 @@ nav {
   .artwork-info,
   .exhibit-info {
     padding-right: 0;
+    padding-top: 20px;
+    width: 100%;
+  }
+
+  .exhibit-works-container {
+    justify-content: flex-start;
+  }
+
+  .exhibit-work-thumbnail-container {
+    margin: 0 5% 5% 0;
   }
 
   .year-container {
@@ -512,11 +536,6 @@ nav {
   .image-next,
   .image-prev {
     width: 15px;
-  }
-
-  .modal-next,
-  .modal-prev {
-    width: 20px;
   }
 
   .modal-next {
@@ -549,4 +568,23 @@ nav {
   .next-prev-link {
     margin-left: 10px;
   }
+
+  .work-slideshow {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.work-slides {
+  width: 95%;
+  height: calc(70vh - 125px);
+}
+
+.work-slide-img-container {
+  display: flex;
+  height: calc(70vh - 125px);
+  width: 100%;
+  cursor: pointer;
+}
+
 }
