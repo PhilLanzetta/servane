@@ -5,6 +5,7 @@ import { renderRichText } from "gatsby-source-contentful/rich-text"
 
 const Biography = ({ data }) => {
   const bioRichText = data.contentfulBiographyPage.cv
+  const cvPdf = data.contentfulBiographyPage.cvPdf.url
 
   const renderOptions = {
     renderText: text => {
@@ -16,7 +17,12 @@ const Biography = ({ data }) => {
 
   return (
     <Layout>
-      <section className="bio-page">{renderRichText(bioRichText, renderOptions)}</section>
+      <section className="bio-page">
+        <a href={cvPdf} target="_blank" rel="noreferrer" className="cv-button">
+          View as PDF
+        </a>
+        {renderRichText(bioRichText, renderOptions)}
+      </section>
     </Layout>
   )
 }
@@ -26,6 +32,9 @@ export const query = graphql`
     contentfulBiographyPage {
       cv {
         raw
+      }
+      cvPdf {
+        url
       }
     }
   }

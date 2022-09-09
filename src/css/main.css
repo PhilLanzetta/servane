@@ -401,9 +401,32 @@ nav {
   flex-direction: column;
 }
 
+.bio-page {
+  position: relative;
+  padding: 0;
+  padding-top: 40px;
+  margin: 40px 10vw;
+}
+
 .bio-page p {
   display: block;
   min-height: var(--fs-normal);
+}
+
+.cv-button {
+  position: absolute;
+  font-size: var(--fs-small);
+  right: 0;
+  border: 1px solid #000;
+  border-radius: 4px;
+  padding: 4px 12px;
+  transition: 400ms;
+}
+
+.cv-button:hover {
+  color: #fff;
+  background: #000;
+  transition: 400ms;
 }
 
 .modal {
@@ -456,6 +479,10 @@ nav {
 
   section {
     padding: 40px 5vw;
+  }
+
+  .bio-page {
+    margin: 40px 5vw;
   }
 
   .home-container {
