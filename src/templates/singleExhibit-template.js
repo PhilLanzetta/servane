@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import { motion, AnimatePresence } from "framer-motion"
 import Layout from "../components/layout"
 import Slider from "react-slick"
 import slugify from "slugify"
@@ -121,7 +122,7 @@ const SingleExhibit = ({ data, pageContext }) => {
         </article>
       </aside>
       <section>
-        <article className="work-slideshow">
+        <article className="work-slideshow exhibit">
           <Slider {...settings} className="work-slides">
             {exhibitionImages.map((image, index) => {
               return (
@@ -208,29 +209,37 @@ const SingleExhibit = ({ data, pageContext }) => {
           </article>
         </article>
       </section>
-      {isOpen && (
-        <aside className="modal">
-          <button className="close-btn white" onClick={handleClose}>
-            X
-          </button>
-          <Slider {...fullSettings} className="modal-slider">
-            {exhibitionImages.map((image, index) => {
-              return (
-                <div className="modal-slides-container" key={image.id}>
-                  <div className="modal-img-container">
-                    <GatsbyImage
-                      image={image.gatsbyImageData}
-                      imgStyle={{ objectFit: "contain" }}
-                      alt={image.description}
-                      className="modal-slide-img"
-                    ></GatsbyImage>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.aside
+            key="modal"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="modal"
+          >
+            <button className="close-btn white" onClick={handleClose}>
+              X
+            </button>
+            <Slider {...fullSettings} className="modal-slider">
+              {exhibitionImages.map((image, index) => {
+                return (
+                  <div className="modal-slides-container" key={image.id}>
+                    <div className="modal-img-container">
+                      <GatsbyImage
+                        image={image.gatsbyImageData}
+                        imgStyle={{ objectFit: "contain" }}
+                        alt={image.description}
+                        className="modal-slide-img"
+                      ></GatsbyImage>
+                    </div>
                   </div>
-                </div>
-              )
-            })}
-          </Slider>
-        </aside>
-      )}
+                )
+              })}
+            </Slider>
+          </motion.aside>
+        )}
+      </AnimatePresence>
     </Layout>
   )
 }

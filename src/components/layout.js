@@ -1,5 +1,6 @@
 import React from "react"
 import { useState, useEffect } from "react"
+import { motion, AnimatePresence } from "framer-motion"
 import Header from "./header"
 import SlideShow from "./slideshow"
 
@@ -12,7 +13,7 @@ const Layout = ({ children }) => {
   }
 
   useEffect(() => {
-    if (idleTime < 9) {
+    if (idleTime < 10) {
       const timer = setTimeout(() => {
         setIdleTime(idleTime + 1)
       }, 1000)
@@ -27,14 +28,26 @@ const Layout = ({ children }) => {
         role="presentation"
         onMouseMove={() => setIdleTime(0)}
         onKeyDown={() => setIdleTime(0)}
+        onTouchStart={() => setIdleTime(0)}
       >
         {children}
-        {idleTime > 8 && (
-          <SlideShow
-            onMouseMove={() => setIdleTime(0)}
-            onKeyDown={() => setIdleTime(0)}
-          ></SlideShow>
-        )}
+        <AnimatePresence>
+          {idleTime > 9 && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              key="modal"
+              className="modal"
+            >
+              <SlideShow
+                onMouseMove={() => setIdleTime(0)}
+                onKeyDown={() => setIdleTime(0)}
+                onTouchStart={() => setIdleTime(0)}
+              ></SlideShow>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </main>
     </>
   )
