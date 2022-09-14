@@ -47,7 +47,6 @@ const SlideShow = () => {
               image={image.gatsbyImageData}
               alt={image.description}
               style={{ height: "80vh", width: `${imgWidth}vh` }}
-              loading="eager"
             ></GatsbyImage>
           </div>
         )
