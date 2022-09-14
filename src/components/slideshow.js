@@ -10,7 +10,7 @@ const query = graphql`
     ) {
       nodes {
         id
-        gatsbyImageData(placeholder: BLURRED)
+        gatsbyImageData(placeholder: NONE)
         description
       }
     }
