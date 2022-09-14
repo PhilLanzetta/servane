@@ -37,21 +37,22 @@ const SlideShow = () => {
   const imageArray = shuffleArray(data.allContentfulAsset.nodes)
 
   return (
-        <Marquee gradient={false} className="image-marquee">
-          {imageArray.map(image => {
-            const imgWidth =
-              (image.gatsbyImageData.width * 80) / image.gatsbyImageData.height
-            return (
-              <div key={image.id} className="marquee-img-container">
-                <GatsbyImage
-                  image={image.gatsbyImageData}
-                  alt={image.description}
-                  style={{ height: "80vh", width: `${imgWidth}vh` }}
-                ></GatsbyImage>
-              </div>
-            )
-          })}
-        </Marquee>
+    <Marquee gradient={false} className="image-marquee">
+      {imageArray.map(image => {
+        const imgWidth =
+          (image.gatsbyImageData.width * 80) / image.gatsbyImageData.height
+        return (
+          <div key={image.id} className="marquee-img-container">
+            <GatsbyImage
+              image={image.gatsbyImageData}
+              alt={image.description}
+              style={{ height: "80vh", width: `${imgWidth}vh` }}
+              loading="eager"
+            ></GatsbyImage>
+          </div>
+        )
+      })}
+    </Marquee>
   )
 }
 
