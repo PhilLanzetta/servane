@@ -1,7 +1,6 @@
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import Marquee from "react-fast-marquee"
-import { GatsbyImage } from "gatsby-plugin-image"
 
 const query = graphql`
   query {
@@ -10,7 +9,9 @@ const query = graphql`
     ) {
       nodes {
         id
-        gatsbyImageData(placeholder: NONE)
+        url
+        width
+        height
         description
       }
     }
@@ -39,15 +40,14 @@ const SlideShow = () => {
   return (
     <Marquee gradient={false} className="image-marquee">
       {imageArray.map(image => {
-        const imgWidth =
-          (image.gatsbyImageData.width * 80) / image.gatsbyImageData.height
+        const imgWidth = (image.width * 80) / image.height
         return (
           <div key={image.id} className="marquee-img-container">
-            <GatsbyImage
-              image={image.gatsbyImageData}
+            <img
+              src={image.url}
               alt={image.description}
               style={{ height: "80vh", width: `${imgWidth}vh` }}
-            ></GatsbyImage>
+            ></img>
           </div>
         )
       })}
