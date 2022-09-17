@@ -32,7 +32,6 @@ function NextArrow(props) {
 }
 
 function PrevArrow(props) {
-  console.log(props)
   const { onClick } = props
   return (
     <div
@@ -92,6 +91,7 @@ const SingleWork = ({ data, pageContext }) => {
   const settings = {
     nextArrow: <NextArrow addClassName="image-next" />,
     prevArrow: <PrevArrow addClassName="image-prev" />,
+    adaptiveHeight: true,
   }
 
   const fullSettings = {

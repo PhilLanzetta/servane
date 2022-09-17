@@ -12,6 +12,10 @@ const Layout = ({ children }) => {
     setIsOpen(!isOpen)
   }
 
+  const resetTimer = () => {
+    setIdleTime(0)
+  }
+
   useEffect(() => {
     if (idleTime < 10) {
       const timer = setTimeout(() => {
@@ -21,14 +25,21 @@ const Layout = ({ children }) => {
     }
   }, [idleTime])
 
+  useEffect(() => {
+    if (typeof window !== `undefined`) {
+      window.addEventListener("scroll", resetTimer)
+      return () => window.removeEventListener("scroll", resetTimer)
+    }
+  })
+
   return (
     <>
       <Header toggleMenu={toggleMenu} isOpen={isOpen} />
       <main
         role="presentation"
-        onMouseMove={() => setIdleTime(0)}
-        onKeyDown={() => setIdleTime(0)}
-        onTouchStart={() => setIdleTime(0)}
+        onMouseMove={resetTimer}
+        onTouchStart={resetTimer}
+        onClick={resetTimer}
       >
         {children}
         <AnimatePresence>
@@ -41,9 +52,9 @@ const Layout = ({ children }) => {
               className="modal"
             >
               <SlideShow
-                onMouseMove={() => setIdleTime(0)}
-                onKeyDown={() => setIdleTime(0)}
-                onTouchStart={() => setIdleTime(0)}
+                onMouseMove={resetTimer}
+                onClick={resetTimer}
+                onTouchStart={resetTimer}
               ></SlideShow>
             </motion.div>
           )}

@@ -10,11 +10,6 @@
   margin: 0;
 }
 
-html,
-body {
-  height: 100%;
-}
-
 body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
@@ -289,7 +284,7 @@ nav {
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: flex-start;
 }
 
 .exhibit {
@@ -297,13 +292,11 @@ nav {
 }
 
 .work-slides {
-  width: 50%;
-  height: calc(80vh - 125px);
+  width: 55%;
 }
 
 .work-slide-img-container {
   display: flex;
-  height: calc(80vh - 125px);
   width: 100%;
   cursor: pointer;
 }
@@ -314,8 +307,7 @@ nav {
 .modal-next {
   position: absolute;
   width: 15px;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 0;
   cursor: pointer;
 }
 
