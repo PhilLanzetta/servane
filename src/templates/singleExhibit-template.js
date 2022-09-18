@@ -122,7 +122,7 @@ const SingleExhibit = ({ data, pageContext }) => {
         </article>
       </aside>
       <section>
-        <article className="work-slideshow exhibit">
+        <article className="work-slideshow">
           <Slider {...settings} className="work-slides">
             {exhibitionImages.map((image, index) => {
               return (
@@ -181,9 +181,6 @@ const SingleExhibit = ({ data, pageContext }) => {
                     return (
                       <>
                         {work.artworkImages.map((image, index) => {
-                          const imgWidth =
-                            (image.gatsbyImageData.width * 15) /
-                            image.gatsbyImageData.height
                           return (
                             <Link
                               key={index}
@@ -193,7 +190,6 @@ const SingleExhibit = ({ data, pageContext }) => {
                               <figure>
                                 <GatsbyImage
                                   image={image.gatsbyImageData}
-                                  style={{ width: `${imgWidth}vw` }}
                                 ></GatsbyImage>
                                 <figcaption>{work.artworkTitle}</figcaption>
                               </figure>
