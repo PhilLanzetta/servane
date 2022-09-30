@@ -58,8 +58,12 @@ function PrevArrow(props) {
 
 const SingleWork = ({ data, pageContext }) => {
   const { next, prev } = pageContext
-  const nextSlug = next ? slugify(next.artworkTitle, { lower: true }) : null
-  const prevSlug = prev ? slugify(prev.artworkTitle, { lower: true }) : null
+  const nextSlug = next
+    ? slugify(next.artworkTitle, { lower: true, remove: /[*+~.()"!:@]/g })
+    : null
+  const prevSlug = prev
+    ? slugify(prev.artworkTitle, { lower: true, remove: /[*+~.()"!:@]/g })
+    : null
   const {
     artworkTitle,
     artworkDescription,
@@ -154,6 +158,7 @@ const SingleWork = ({ data, pageContext }) => {
                 {exhibitionHistory.map((exhibit, index) => {
                   const exhibitSlug = slugify(exhibit.exhibitionTitle, {
                     lower: true,
+                    remove: /[*+~.()"!:@]/g,
                   })
                   return (
                     <Link

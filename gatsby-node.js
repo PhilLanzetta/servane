@@ -27,7 +27,10 @@ exports.createPages = async ({ graphql, actions }) => {
   const works = result.data.allContentfulWork.edges
 
   works.forEach(({ node }, index) => {
-    const workSlug = slugify(node.artworkTitle, { lower: true })
+    const workSlug = slugify(node.artworkTitle, {
+      lower: true,
+      remove: /[*+~.()"!:@]/g,
+    })
     createPage({
       path: `/works/${workSlug}`,
       component: path.resolve(`src/templates/singleWork-template.js`),
@@ -42,7 +45,10 @@ exports.createPages = async ({ graphql, actions }) => {
   const exhibits = result.data.allContentfulExhibition.edges
 
   exhibits.forEach(({ node }, index) => {
-    const exhibitSlug = slugify(node.exhibitionTitle, { lower: true })
+    const exhibitSlug = slugify(node.exhibitionTitle, {
+      lower: true,
+      remove: /[*+~.()"!:@]/g,
+    })
     createPage({
       path: `/exhibitions/${exhibitSlug}`,
       component: path.resolve(`src/templates/singleExhibit-template.js`),
