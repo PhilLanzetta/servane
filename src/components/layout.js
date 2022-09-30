@@ -17,7 +17,7 @@ const Layout = ({ children }) => {
   }
 
   useEffect(() => {
-    if (idleTime < 10) {
+    if (idleTime < 20) {
       const timer = setTimeout(() => {
         setIdleTime(idleTime + 1)
       }, 1000)
@@ -43,7 +43,7 @@ const Layout = ({ children }) => {
       >
         {children}
         <AnimatePresence>
-          {idleTime === 10 && (
+          {idleTime === 20 && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
