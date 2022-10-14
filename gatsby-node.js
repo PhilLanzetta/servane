@@ -8,6 +8,7 @@ exports.createPages = async ({ graphql, actions }) => {
       allContentfulWork(sort: { fields: artworkDate, order: DESC }) {
         edges {
           node {
+            slug
             artworkTitle
           }
         }
@@ -18,6 +19,7 @@ exports.createPages = async ({ graphql, actions }) => {
         edges {
           node {
             exhibitionTitle
+            slug
           }
         }
       }
@@ -27,14 +29,12 @@ exports.createPages = async ({ graphql, actions }) => {
   const works = result.data.allContentfulWork.edges
 
   works.forEach(({ node }, index) => {
-    const workSlug = slugify(node.artworkTitle, {
-      lower: true,
-      remove: /[*+~.()"!:@]/g,
-    })
+    const workSlug = node.slug
     createPage({
       path: `/works/${workSlug}`,
       component: path.resolve(`src/templates/singleWork-template.js`),
       context: {
+        slug: node.slug,
         title: node.artworkTitle,
         prev: index === 0 ? null : works[index - 1].node,
         next: index === works.length - 1 ? null : works[index + 1].node,
@@ -45,15 +45,13 @@ exports.createPages = async ({ graphql, actions }) => {
   const exhibits = result.data.allContentfulExhibition.edges
 
   exhibits.forEach(({ node }, index) => {
-    const exhibitSlug = slugify(node.exhibitionTitle, {
-      lower: true,
-      remove: /[*+~.()"!:@]/g,
-    })
+    const exhibitSlug = node.slug
     createPage({
       path: `/exhibitions/${exhibitSlug}`,
       component: path.resolve(`src/templates/singleExhibit-template.js`),
       context: {
         title: node.exhibitionTitle,
+        slug: node.slug,
         prev: index === 0 ? null : exhibits[index - 1].node,
         next: index === exhibits.length - 1 ? null : exhibits[index + 1].node,
       },

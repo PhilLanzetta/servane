@@ -58,12 +58,8 @@ function PrevArrow(props) {
 
 const SingleWork = ({ data, pageContext }) => {
   const { next, prev } = pageContext
-  const nextSlug = next
-    ? slugify(next.artworkTitle, { lower: true, remove: /[*+~.()"!:@]/g })
-    : null
-  const prevSlug = prev
-    ? slugify(prev.artworkTitle, { lower: true, remove: /[*+~.()"!:@]/g })
-    : null
+  const nextSlug = next ? next.slug : null
+  const prevSlug = prev ? prev.slug : null
   const {
     artworkTitle,
     artworkDescription,
@@ -156,10 +152,7 @@ const SingleWork = ({ data, pageContext }) => {
               <article className="exhibition-history">
                 <h3>Exhibition History</h3>
                 {exhibitionHistory.map((exhibit, index) => {
-                  const exhibitSlug = slugify(exhibit.exhibitionTitle, {
-                    lower: true,
-                    remove: /[*+~.()"!:@]/g,
-                  })
+                  const exhibitSlug = exhibit.slug
                   return (
                     <Link
                       key={index}
@@ -241,8 +234,9 @@ const SingleWork = ({ data, pageContext }) => {
 }
 
 export const query = graphql`
-  query getSingleArtwork($title: String) {
-    contentfulWork(artworkTitle: { eq: $title }) {
+  query getSingleArtwork($slug: String) {
+    contentfulWork(slug: { eq: $slug }) {
+      slug
       artworkDescription
       artworkTitle
       artworkDate
@@ -252,6 +246,7 @@ export const query = graphql`
         description
       }
       exhibitionHistory {
+        slug
         exhibitionLocation
         exhibitionTitle
         exhibitionOrganizer

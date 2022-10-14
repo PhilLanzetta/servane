@@ -340,6 +340,8 @@ nav {
 .artwork-info,
 .exhibit-info {
   padding-right: 5vw;
+  padding-bottom: 20px;
+  display: block;
 }
 
 .artwork-info p,
@@ -385,7 +387,6 @@ nav {
 .exhibit-works-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
 }
 
 .exhibit-press-release {

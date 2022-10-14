@@ -9,6 +9,7 @@ const query = graphql`
     allContentfulWork(sort: { fields: artworkDate, order: DESC }) {
       nodes {
         id
+        slug
         artworkDate
         artworkTitle
         artworkImages {
@@ -23,6 +24,7 @@ const query = graphql`
     ) {
       nodes {
         id
+        slug
         exhibitionTitle
         exhibitionLocation
         exhibitionOrganizer
@@ -60,20 +62,16 @@ const Year = ({ year, isExhibit }) => {
               (work.artworkImages[0].gatsbyImageData.width * 20) /
               work.artworkImages[0].gatsbyImageData.height
             if (artworkYear === year) {
-              const slug = slugify(work.artworkTitle, {
-                lower: true,
-                remove: /[*+~.()"!:@]/g,
-              })
               return (
                 <Link
                   key={work.id}
-                  to={slug}
+                  to={work.slug}
                   className="work-thumbnail-container"
                 >
                   <GatsbyImage
                     image={work.artworkImages[0].gatsbyImageData}
                     alt={work.artworkImages[0].description}
-                    style={{width: `${imgWidth}vw`}}
+                    style={{ width: `${imgWidth}vw` }}
                     className="work-thumbnail"
                   ></GatsbyImage>
                 </Link>
@@ -91,10 +89,7 @@ const Year = ({ year, isExhibit }) => {
               exhibit.exhibitionStartDate
             ).getFullYear()
             if (exhibitYear === year) {
-              const slug = slugify(exhibit.exhibitionTitle, {
-                lower: true,
-                remove: /[*+~.()"!:@]/g,
-              })
+              const slug = exhibit.slug
               return (
                 <Link
                   key={exhibit.id}

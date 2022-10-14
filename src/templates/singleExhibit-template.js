@@ -181,29 +181,19 @@ const SingleExhibit = ({ data, pageContext }) => {
                 <h3>Works in Exhibition</h3>
                 <article className="exhibit-works-container">
                   {worksInExhibition.map((work, index) => {
-                    const slug = slugify(work.artworkTitle, {
-                      lower: true,
-                      remove: /[*+~.()"!:@]/g,
-                    })
+                    const slug = work.slug
                     return (
-                      <>
-                        {work.artworkImages.map((image, index) => {
-                          return (
-                            <Link
-                              key={index}
-                              to={`/works/${slug}`}
-                              className="exhibit-work-thumbnail-container"
-                            >
-                              <figure>
-                                <GatsbyImage
-                                  image={image.gatsbyImageData}
-                                ></GatsbyImage>
-                                <figcaption>{work.artworkTitle}</figcaption>
-                              </figure>
-                            </Link>
-                          )
-                        })}
-                      </>
+                      <Link
+                        key={index}
+                        to={`/works/${slug}`}
+                        className="exhibit-work-thumbnail-container"
+                      >
+                        <figure>
+                          <GatsbyImage
+                            image={work.artworkImages[0].gatsbyImageData}
+                          ></GatsbyImage>
+                        </figure>
+                      </Link>
                     )
                   })}
                 </article>
@@ -248,8 +238,8 @@ const SingleExhibit = ({ data, pageContext }) => {
 }
 
 export const query = graphql`
-  query getSingleExhibit($title: String) {
-    contentfulExhibition(exhibitionTitle: { eq: $title }) {
+  query getSingleExhibit($slug: String) {
+    contentfulExhibition(slug: { eq: $slug }) {
       exhibitionTitle
       exhibitionStartDate
       exhibitionEndDate
@@ -265,6 +255,7 @@ export const query = graphql`
       }
       worksInExhibition {
         artworkTitle
+        slug
         artworkImages {
           id
           gatsbyImageData(placeholder: BLURRED)
