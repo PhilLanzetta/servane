@@ -189,9 +189,12 @@ const SingleExhibit = ({ data, pageContext }) => {
                         className="exhibit-work-thumbnail-container"
                       >
                         <figure>
-                          <GatsbyImage
-                            image={work.artworkImages[0].gatsbyImageData}
-                          ></GatsbyImage>
+                          {work.artworkImages[0]?.gatsbyImageData && (
+                            <GatsbyImage
+                              image={work.artworkImages[0].gatsbyImageData}
+                              alt={work.artworkImages[0].description}
+                            ></GatsbyImage>
+                          )}
                         </figure>
                       </Link>
                     )
