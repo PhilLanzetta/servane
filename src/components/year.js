@@ -57,10 +57,11 @@ const Year = ({ year, isExhibit }) => {
       {tab === "work" && (
         <article className="works-container fade-in">
           {works.map(work => {
+            console.log(work.artworkImages[0])
             const artworkYear = new Date(work.artworkDate).getFullYear()
             const imgWidth =
-              (work.artworkImages[0].gatsbyImageData.width * 20) /
-              work.artworkImages[0].gatsbyImageData.height
+              (work.artworkImages[0]?.gatsbyImageData.width * 20) /
+              work.artworkImages[0]?.gatsbyImageData.height
             if (artworkYear === year) {
               return (
                 <Link
@@ -69,8 +70,8 @@ const Year = ({ year, isExhibit }) => {
                   className="work-thumbnail-container"
                 >
                   <GatsbyImage
-                    image={work.artworkImages[0].gatsbyImageData}
-                    alt={work.artworkImages[0].description}
+                    image={work.artworkImages[0]?.gatsbyImageData}
+                    alt={work.artworkImages[0]?.description}
                     style={{ width: `${imgWidth}vw` }}
                     className="work-thumbnail"
                   ></GatsbyImage>
