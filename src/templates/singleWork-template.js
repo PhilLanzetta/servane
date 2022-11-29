@@ -120,7 +120,7 @@ const SingleWork = ({ data, pageContext }) => {
       <section>
         <article className="work-slideshow">
           <Slider {...settings} className="work-slides">
-            {artworkImages.map((image, index) => {
+            {artworkImages?.map((image, index) => {
               return (
                 <div
                   className="work-slides-container"
