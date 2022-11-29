@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Layout from "../components/layout"
 import Slider from "react-slick"
-import slugify from "slugify"
 import { graphql, Link } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
 
