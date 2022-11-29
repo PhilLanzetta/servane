@@ -56,7 +56,7 @@ const Year = ({ year, isExhibit }) => {
       </div>
       {tab === "work" && (
         <article className="works-container fade-in">
-          {works.map(work => {
+          {works?.map(work => {
             const artworkYear = new Date(work.artworkDate).getFullYear()
             const imgWidth =
               (work.artworkImages[0]?.gatsbyImageData.width * 20) /
