@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Layout from "../components/layout"
 import Slider from "react-slick"
-import slugify from "slugify"
 import { graphql, Link } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
 import Seo from "../components/seo"
@@ -59,12 +58,8 @@ function PrevArrow(props) {
 
 const SingleExhibit = ({ data, pageContext }) => {
   const { next, prev } = pageContext
-  const nextSlug = next
-    ? slugify(next.exhibitionTitle, { lower: true, remove: /[*+~.()"!:@]/g })
-    : null
-  const prevSlug = prev
-    ? slugify(prev.exhibitionTitle, { lower: true, remove: /[*+~.()"!:@]/g })
-    : null
+  const nextSlug = next ? next.slug : null
+  const prevSlug = prev ? prev.slug : null
   const {
     exhibitionTitle,
     exhibitionStartDate,
