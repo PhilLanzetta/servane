@@ -3,6 +3,7 @@ import Layout from "../components/layout"
 import Year from "../components/year"
 import { graphql } from "gatsby"
 import { useState } from "react"
+import Seo from "../components/seo"
 
 const Works = ({ data, location }) => {
   const { years } = data.contentfulHomePage
@@ -32,5 +33,7 @@ export const query = graphql`
     }
   }
 `
+
+export const Head = () => <Seo title="Works" />
 
 export default Works

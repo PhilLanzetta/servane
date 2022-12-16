@@ -266,14 +266,15 @@ nav {
 
 .work-thumbnail-container {
   display: flex;
-  margin: 0 5% 5% 0;
-  height: 20vw;
+  margin: 0 3% 3% 0;
+  height: 23vw;
 }
 
 .exhibit-work-thumbnail-container {
   display: flex;
   margin: 0 2% 10% 0;
   width: 31%;
+  aspect-ratio: 1 / 1;
 }
 
 .work-thumbnail {

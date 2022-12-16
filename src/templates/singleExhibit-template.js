@@ -5,6 +5,7 @@ import Slider from "react-slick"
 import slugify from "slugify"
 import { graphql, Link } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
+import Seo from "../components/seo"
 
 function NextArrow(props) {
   const { onClick } = props
@@ -167,12 +168,7 @@ const SingleExhibit = ({ data, pageContext }) => {
               })}
             </p>
             {pressRelease && (
-              <a
-                href={pressRelease.url}
-                className="exhibit-press-release"
-                target="_blank"
-                rel="noreferrer"
-              >
+              <a href={pressRelease.url} className="exhibit-press-release">
                 View the Press Release
               </a>
             )}
@@ -188,14 +184,12 @@ const SingleExhibit = ({ data, pageContext }) => {
                         to={`/works/${slug}`}
                         className="exhibit-work-thumbnail-container"
                       >
-                        <figure>
-                          {work.artworkImages[0]?.gatsbyImageData && (
-                            <GatsbyImage
-                              image={work.artworkImages[0].gatsbyImageData}
-                              alt={work.artworkImages[0].description}
-                            ></GatsbyImage>
-                          )}
-                        </figure>
+                        {work.artworkImages[0].gatsbyImageData && (
+                          <GatsbyImage
+                            image={work.artworkImages[0].gatsbyImageData}
+                            alt={work.artworkImages[0].description}
+                          ></GatsbyImage>
+                        )}
                       </Link>
                     )
                   })}
@@ -268,5 +262,9 @@ export const query = graphql`
     }
   }
 `
+
+export const Head = ({ data }) => (
+  <Seo title={data.contentfulExhibition.exhibitionTitle} />
+)
 
 export default SingleExhibit

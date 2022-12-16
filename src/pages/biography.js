@@ -2,6 +2,7 @@ import React from "react"
 import Layout from "../components/layout"
 import { graphql } from "gatsby"
 import { renderRichText } from "gatsby-source-contentful/rich-text"
+import Seo from "../components/seo"
 
 const Biography = ({ data }) => {
   const bioRichText = data.contentfulBiographyPage.cv
@@ -39,5 +40,6 @@ export const query = graphql`
     }
   }
 `
+export const Head = () => <Seo title="Biography" />
 
 export default Biography

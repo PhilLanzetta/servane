@@ -4,15 +4,13 @@ import Marquee from "react-fast-marquee"
 
 const query = graphql`
   query {
-    allContentfulAsset(
-      filter: { file: { contentType: { eq: "image/jpeg" } } }
-    ) {
-      nodes {
+    contentfulSlideshow {
+      images {
         id
-        url
-        width
-        height
         description
+        height
+        width
+        url
       }
     }
   }
@@ -35,7 +33,7 @@ const SlideShow = () => {
     return array
   }
 
-  const imageArray = shuffleArray(data.allContentfulAsset.nodes)
+  const imageArray = shuffleArray(data.contentfulSlideshow.images)
 
   return (
     <Marquee gradient={false} className="image-marquee">

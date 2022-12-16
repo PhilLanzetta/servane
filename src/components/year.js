@@ -1,6 +1,5 @@
 import React from "react"
 import { useState } from "react"
-import slugify from "slugify"
 import { useStaticQuery, graphql, Link } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
 
@@ -56,10 +55,10 @@ const Year = ({ year, isExhibit }) => {
       </div>
       {tab === "work" && (
         <article className="works-container fade-in">
-          {works?.map(work => {
+          {works.map(work => {
             const artworkYear = new Date(work.artworkDate).getFullYear()
             const imgWidth =
-              (work.artworkImages[0]?.gatsbyImageData.width * 20) /
+              (work.artworkImages[0]?.gatsbyImageData.width * 23) /
               work.artworkImages[0]?.gatsbyImageData.height
             if (artworkYear === year) {
               return (
@@ -68,14 +67,12 @@ const Year = ({ year, isExhibit }) => {
                   to={work.slug}
                   className="work-thumbnail-container"
                 >
-                  {work.artworkImages[0]?.gatsbyImageData && (
-                    <GatsbyImage
-                      image={work.artworkImages[0].gatsbyImageData}
-                      alt={work.artworkImages[0].description}
-                      style={{ width: `${imgWidth}vw` }}
-                      className="work-thumbnail"
-                    ></GatsbyImage>
-                  )}
+                  <GatsbyImage
+                    image={work.artworkImages[0]?.gatsbyImageData}
+                    alt={work.artworkImages[0]?.description}
+                    style={{ width: `${imgWidth}vw` }}
+                    className="work-thumbnail"
+                  ></GatsbyImage>
                 </Link>
               )
             } else {

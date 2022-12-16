@@ -4,6 +4,7 @@ import Layout from "../components/layout"
 import Slider from "react-slick"
 import { graphql, Link } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
+import Seo from "../components/seo"
 
 function NextArrow(props) {
   const { onClick } = props
@@ -255,5 +256,9 @@ export const query = graphql`
     }
   }
 `
+
+export const Head = ({ data }) => (
+  <Seo title={data.contentfulWork.artworkTitle} />
+)
 
 export default SingleWork
