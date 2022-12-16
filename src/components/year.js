@@ -58,8 +58,8 @@ const Year = ({ year, isExhibit }) => {
           {works.map(work => {
             const artworkYear = new Date(work.artworkDate).getFullYear()
             const imgWidth =
-              (work.artworkImages[0]?.gatsbyImageData.width * 23) /
-              work.artworkImages[0]?.gatsbyImageData.height
+              (work.artworkImages?.[0]?.gatsbyImageData.width * 23) /
+              work.artworkImages?.[0]?.gatsbyImageData.height
             if (artworkYear === year) {
               return (
                 <Link
@@ -67,12 +67,14 @@ const Year = ({ year, isExhibit }) => {
                   to={work.slug}
                   className="work-thumbnail-container"
                 >
-                  <GatsbyImage
-                    image={work.artworkImages[0]?.gatsbyImageData}
-                    alt={work.artworkImages[0]?.description}
-                    style={{ width: `${imgWidth}vw` }}
-                    className="work-thumbnail"
-                  ></GatsbyImage>
+                  {imgWidth && (
+                    <GatsbyImage
+                      image={work.artworkImages?.[0]?.gatsbyImageData}
+                      alt={work.artworkImages?.[0]?.description}
+                      style={{ width: `${imgWidth}vw` }}
+                      className="work-thumbnail"
+                    ></GatsbyImage>
+                  )}
                 </Link>
               )
             } else {

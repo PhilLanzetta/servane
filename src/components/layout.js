@@ -43,7 +43,7 @@ const Layout = ({ children }) => {
       >
         {children}
         <AnimatePresence>
-          {idleTime === 20 && (
+          {idleTime === 25 && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
