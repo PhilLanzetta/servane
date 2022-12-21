@@ -272,9 +272,8 @@ nav {
 
 .exhibit-work-thumbnail-container {
   display: flex;
-  margin: 0 2% 10% 0;
-  width: 31%;
-  aspect-ratio: 1 / 1;
+  margin: 0 2% 2% 0;
+  height: 150px;
 }
 
 .work-thumbnail {
@@ -343,6 +342,7 @@ nav {
   padding-right: 5vw;
   padding-bottom: 20px;
   display: block;
+  width: 45%;
 }
 
 .artwork-info p,

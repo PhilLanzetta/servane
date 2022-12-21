@@ -173,6 +173,9 @@ const SingleExhibit = ({ data, pageContext }) => {
                 <article className="exhibit-works-container">
                   {worksInExhibition.map((work, index) => {
                     const slug = work.slug
+                    const imgWidth =
+                      (work.artworkImages?.[0]?.gatsbyImageData.width * 150) /
+                      work.artworkImages?.[0]?.gatsbyImageData.height
                     return (
                       <Link
                         key={index}
@@ -181,8 +184,10 @@ const SingleExhibit = ({ data, pageContext }) => {
                       >
                         {work.artworkImages[0].gatsbyImageData && (
                           <GatsbyImage
-                            image={work.artworkImages[0].gatsbyImageData}
-                            alt={work.artworkImages[0].description}
+                            image={work.artworkImages?.[0]?.gatsbyImageData}
+                            alt={work.artworkImages?.[0]?.description}
+                            style={{ width: `${imgWidth}px` }}
+                            className="work-thumbnail"
                           ></GatsbyImage>
                         )}
                       </Link>

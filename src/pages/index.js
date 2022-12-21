@@ -1,13 +1,12 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
-import slugify from "slugify"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 
 const IndexPage = ({ data }) => {
   const { homeImage, homeImageTitle, years } = data.contentfulHomePage
-  const homeWorkLink = slugify(homeImageTitle, { lower: true })
+  const homeWorkLink = homeImageTitle
   const descYears = years
     .map(year => parseInt(year, 10))
     .sort(function (a, b) {

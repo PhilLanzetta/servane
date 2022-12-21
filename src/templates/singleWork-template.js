@@ -157,7 +157,7 @@ const SingleWork = ({ data, pageContext }) => {
                     <Link
                       key={index}
                       to={`/exhibitions/${exhibitSlug}`}
-                      className="exhibit-info"
+                      className="exhibit-info-link"
                     >
                       <span className="exhibit-title">
                         {exhibit.exhibitionTitle}

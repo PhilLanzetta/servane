@@ -17,7 +17,7 @@ const Layout = ({ children }) => {
   }
 
   useEffect(() => {
-    if (idleTime < 20) {
+    if (idleTime < 25) {
       const timer = setTimeout(() => {
         setIdleTime(idleTime + 1)
       }, 1000)
